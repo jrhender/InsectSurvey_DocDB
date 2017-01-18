@@ -30,10 +30,13 @@ namespace InsectSurvey
             // Add framework services.
             services.AddMvc();
 
-            // Add the app settings service
+            // Added - uses IOptions<T> for your settings
+            services.AddOptions();
+            
+            // Added - Add the app settings service
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-            // Add the db settings service
+            // Added - Add the db settings service
             services.Configure<DbSettings>(Configuration.GetSection("DbSettings"));
         }
 
