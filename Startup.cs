@@ -29,6 +29,12 @@ namespace InsectSurvey
         {
             // Add framework services.
             services.AddMvc();
+
+            // Add the app settings service
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+            // Add the db settings service
+            services.Configure<DbSettings>(Configuration.GetSection("DbSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
