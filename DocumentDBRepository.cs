@@ -3,13 +3,15 @@
  using Microsoft.Azure.Documents.Linq; 
  using System.Configuration;
  using System.Linq.Expressions;
+ using System.Linq;
  using System.Threading.Tasks;
  using System;
+ using System.Collections.Generic;
+
+ //Note: Refactor to be object with DI (http://stackoverflow.com/questions/38833474/how-to-migrate-a-static-class-from-net-to-net-core)
 
  public static class DocumentDBRepository<T> where T : class
  {
-     //private static readonly string DatabaseId = ConfigurationManager.AppSettings["database"];
-     //private static readonly string CollectionId = ConfigurationManager.AppSettings["collection"];
      private static DocumentClient client;
 
      public static void Initialize(string endpoint, string authKey, string databaseId, string collectionId)
@@ -59,4 +61,20 @@
              }
          }
      }
+
+    public static async Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> predicate, string databaseId, string collectionId)
+    {
+        IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
+            UriFactory.CreateDocumentCollectionUri(databaseId, collectionId))
+            .Where(predicate)
+            .AsDocumentQuery();
+
+        List<T> results = new List<T>();
+        while (query.HasMoreResults)
+        {
+            results.AddRange(await query.ExecuteNextAsync<T>());
+        }
+
+        return results;
+    }
  }
