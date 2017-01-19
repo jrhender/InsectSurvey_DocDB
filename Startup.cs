@@ -20,6 +20,13 @@ namespace InsectSurvey
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            string dbEndpoint = Configuration["DbSettings:Endpoint"];
+            string dbAuthKey = Configuration["DbSettings:Authkey"];
+            string dbID = Configuration["DbSettings:DatabaseID"];
+            string dbCollection = Configuration["DbSettings:Collection"];
+
+            DocumentDBRepository<InsectSurvey.Models.Item>.Initialize(dbEndpoint, dbAuthKey, dbID, dbCollection);
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -32,9 +39,6 @@ namespace InsectSurvey
 
             // Added - uses IOptions<T> for your settings
             services.AddOptions();
-            
-            // Added - Add the app settings service
-            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             // Added - Add the db settings service
             services.Configure<DbSettings>(Configuration.GetSection("DbSettings"));
