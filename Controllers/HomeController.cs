@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using InsectSurvey.Models;
 
 namespace InsectSurvey.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly DbSettings _dbSettings;
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        [ActionName("About")]
+        public async Task<ActionResult> IndexAsync()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            var items = await DocumentDBRepository<Item>.GetItemsAsync(d => !d.Completed, _dbSettings.DatabaseID, _dbSettings.Collection);
+            return View(items);
         }
 
         public IActionResult Contact()
