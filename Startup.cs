@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+
 namespace InsectSurvey
 {
     public class Startup
@@ -34,14 +35,14 @@ namespace InsectSurvey
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddMvc();
-
             // Added - uses IOptions<T> for your settings
             services.AddOptions();
 
             // Added - Add the db settings service
             services.Configure<DbSettings>(Configuration.GetSection("DbSettings"));
+
+            // Add framework services.
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

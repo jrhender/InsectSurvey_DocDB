@@ -1,7 +1,6 @@
  using Microsoft.Azure.Documents; 
  using Microsoft.Azure.Documents.Client; 
  using Microsoft.Azure.Documents.Linq; 
- using System.Configuration;
  using System.Linq.Expressions;
  using System.Linq;
  using System.Threading.Tasks;
