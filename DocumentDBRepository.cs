@@ -76,4 +76,9 @@
 
         return results;
     }
+
+    public static async Task<Document> CreateItemAsync(T item, string databaseId, string collectionId)
+    {
+        return await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(databaseId, collectionId), item);
+    }
  }

@@ -24,20 +24,40 @@ namespace InsectSurvey.Controllers
         [ActionName("About")]
         public async Task<ActionResult> IndexAsync()
         {
-            var items = await DocumentDBRepository<Item>.GetItemsAsync(d => !d.Completed, _dbSettings.DatabaseID, _dbSettings.Collection);
+            var items = await DocumentDBRepository<Item>.GetItemsAsync(d => d.FirstName != "Bill", _dbSettings.DatabaseID, _dbSettings.Collection);
             return View(items);
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+        // public IActionResult Contact()
+        // {
+        //     ViewData["Message"] = "Your contact page.";
 
-            return View();
-        }
+        //     return View();
+        // }
 
         public IActionResult Error()
         {
             return View();
+        }
+
+        [ActionName("Create")]
+        public async Task<ActionResult> CreateAsync()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("Create")]
+        //[ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateAsync([FromForm] Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                await DocumentDBRepository<Item>.CreateItemAsync(item, _dbSettings.DatabaseID, _dbSettings.Collection);
+                return Json("Created item");
+            }
+
+            return Json("Model state not valid" + item);
         }
     }
 }
