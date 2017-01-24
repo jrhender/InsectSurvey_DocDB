@@ -4,26 +4,6 @@
 <h2>@ViewData["Title"].</h2>
 <h3>@ViewData["Message"]</h3>
 
-<div id="contact_form">
-<form name="contact" action="">
-  <fieldset>
-    <label for="name" id="name_label">Name</label>
-    <input type="text" name="name" id="name" size="30" value="" class="text-input" />
-    <label class="error" for="name" id="name_error">This field is required.</label>
-     
-    <label for="email" id="email_label">Return Email</label>
-    <input type="text" name="email" id="email" size="30" value="" class="text-input" />
-    <label class="error" for="email" id="email_error">This field is required.</label>
-     
-    <label for="phone" id="phone_label">Return Phone</label>
-    <input type="text" name="phone" id="phone" size="30" value="" class="text-input" />
-    <label class="error" for="phone" id="phone_error">This field is required.</label>
-     
-      <br />
-    <input type="submit" name="submit" class="button" id="submit_btn" value="Send" />
-  </fieldset>
-</form>
-</div>
 
 <div class="panel-group" id="accordion"> <!-- accordion 1 -->
    <div class="panel panel-primary">
@@ -37,12 +17,29 @@
         </div>
 		<!-- panel body -->
         <div id="accordionOne" class="panel-collapse collapse in">
-          <div class="panel-body">
-           Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco laboris nisi ut aliquip ex ea commodo consequat
-          </div>
+            <div class="panel-body">
+                <div id="contact_form">
+                    <form name="contact" action="">
+                    <fieldset>
+                        <label for="tableID" id="tableID_label">TableID</label>
+                        <input type="number" name="tableID" id="tableID" size="10" value="" class="text-input" />
+                        <label class="error" for="name" id="tableID_error">This field is required.</label>
+                        
+                        <label for="score" id="score_label">Score</label>
+                        <input type="number" name="score" id="score" size="10" value="" class="text-input" />
+                        <label class="error" for="score" id="score_error">This field is required.</label>
+                        
+                        <label for="comments" id="comments_label">Comments</label>
+                        <input type="text" name="comments" id="comments" size="30" value="" class="text-input" />
+                        <label class="error" for="comments" id="comments_error">This field is required.</label>
+                        
+                        <br />
+                        <!--<input type="submit" name="submit" class="button" id="submit_btn" value="Send" />-->
+                        <button id="createRecord">Submit</button>
+                    </fieldset>
+                    </form>
+                </div>
+            </div>
         </div>
   </div>
   
@@ -90,4 +87,4 @@
 	 
  </div>
 
-<button id="createRecord">Create New Record</button>
+
