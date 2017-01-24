@@ -24,7 +24,7 @@ namespace InsectSurvey.Controllers
         [ActionName("About")]
         public async Task<ActionResult> IndexAsync()
         {
-            var items = await DocumentDBRepository<Item>.GetItemsAsync(d => d.FirstName != "Bill", _dbSettings.DatabaseID, _dbSettings.Collection);
+            var items = await DocumentDBRepository<Item>.GetItemsAsync(d => d.QuestionID != 1, _dbSettings.DatabaseID, _dbSettings.Collection);
             return View(items);
         }
 

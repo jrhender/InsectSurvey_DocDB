@@ -21,8 +21,9 @@ namespace InsectSurvey.Models
         // [JsonProperty(PropertyName = "isComplete")]
         // public bool Completed { get; set; }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int Age { get; set; }
+        public int QuestionID { get; set; }
+        public int TableID { get; set; }
+        public int Score { get; set; }
+        public string Comments { get; set; }
     }
 }

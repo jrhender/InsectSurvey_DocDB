@@ -11,13 +11,13 @@ $(document).ready(function() {
         //JSON data
         var dataType = 'application/x-www-form-urlencoded; charset=utf-8';
         var data = {
-            //id: '123',
-            //name: 'john',
-            //description: 'Code',
-            //isCompleted: 'false'
-            FirstName: 'Andrew',
-            LastName: 'Lock',
-            Age: 31
+            QuestionID: 1,
+            TableID: 10,
+            Score: 5,
+            Comments: "Great question!"
+            // FirstName: 'Andrew',
+            // LastName: 'Lock',
+            // Age: 31
         };
 
         console.log('Submitting form...');
